@@ -7,7 +7,6 @@ import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import Contacts from "@/pages/Contacts";
 import Galleries from "@/pages/Galleries";
 import Home from "@/pages/Home";
-import Kitchens from "@/pages/Kitchens";
 
 export default function App() {
   return (
@@ -17,7 +16,6 @@ export default function App() {
       <PageTransition>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/kitchens" element={<Kitchens />} />
           <Route path="/galleries" element={<Galleries />} />
           <Route path="/contacts" element={<Contacts />} />
           <Route path="*" element={<Home />} />

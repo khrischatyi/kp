@@ -153,24 +153,25 @@ export default function Contacts() {
           <aside className="col-span-12 md:col-span-5">
             <div className="rounded-md border border-border/60 bg-surface/40 p-8 md:p-10">
               <h3 className="font-display text-2xl">The studio</h3>
+              <p className="mt-2 text-sm text-muted-foreground">Woodmore Kitchens LLC</p>
               <ul className="mt-6 space-y-5 text-sm">
                 <li className="flex items-start gap-3">
                   <MapPin className="mt-0.5 size-4 text-accent" />
                   <div>
-                    <p className="text-foreground">2401 NW Market Street</p>
-                    <p className="text-muted-foreground">Seattle, WA 98107</p>
+                    <p className="text-foreground">17631 147th St SE</p>
+                    <p className="text-muted-foreground">Monroe, WA 98272</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
                   <Mail className="mt-0.5 size-4 text-accent" />
-                  <a href="mailto:hello@atelierkitchens.com" className="hover:text-accent">
-                    hello@atelierkitchens.com
+                  <a href="mailto:litwinshop@gmail.com" className="hover:text-accent">
+                    litwinshop@gmail.com
                   </a>
                 </li>
                 <li className="flex items-start gap-3">
                   <Phone className="mt-0.5 size-4 text-accent" />
-                  <a href="tel:+12065551234" className="hover:text-accent">
-                    +1 (206) 555 · 1234
+                  <a href="tel:+12068185057" className="hover:text-accent">
+                    206.818.5057
                   </a>
                 </li>
               </ul>

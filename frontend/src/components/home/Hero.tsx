@@ -9,9 +9,10 @@ import { ParallaxImage } from "@/components/shared/ParallaxImage";
 interface HeroProps {
   cover: string | null;
   secondaryCover?: string | null;
+  tertiaryCover?: string | null;
 }
 
-export function Hero({ cover, secondaryCover }: HeroProps) {
+export function Hero({ cover, secondaryCover, tertiaryCover }: HeroProps) {
   const ref = React.useRef<HTMLElement>(null);
   const reduced = useReducedMotion();
 
@@ -78,9 +79,9 @@ export function Hero({ cover, secondaryCover }: HeroProps) {
           transition={{ delay: 0.5, duration: 1 }}
         >
           <p className="col-span-12 max-w-md text-pretty text-base leading-relaxed text-foreground/75 md:col-span-5">
-            Two decades designing and building kitchens for the Pacific Northwest's most
-            considered homes — every piece joined, sanded, and finished by hand in our
-            Ballard workshop.
+            Designing and building kitchens for homes across the Greater Seattle
+            area — every piece joined, sanded, and finished by hand in our Monroe
+            workshop.
           </p>
           <div className="col-span-12 flex flex-wrap items-center gap-4 md:col-span-7 md:justify-end">
             <Button asChild size="lg" variant="primary">
@@ -96,37 +97,64 @@ export function Hero({ cover, secondaryCover }: HeroProps) {
         </motion.div>
       </div>
 
-      {/* Cinematic feature image */}
+      {/* Cinematic feature composition — main image + two stacked landscape
+          companions. All ratios match the source photos so no awkward cropping. */}
       {cover && (
         <motion.div
           style={{ y: imageY }}
           className="relative mx-auto w-full max-w-[1500px] px-4 md:px-10"
         >
-          <div className="relative aspect-[16/9] w-full overflow-hidden rounded-md md:aspect-[21/9]">
-            <ParallaxImage
-              src={cover}
-              alt="Featured kitchen — Atelier Kitchens portfolio"
-              priority
-              strength={0.35}
-              className="size-full"
-            />
-            {secondaryCover && (
-              <div className="absolute bottom-6 right-6 hidden h-44 w-32 overflow-hidden rounded-sm border border-white/10 shadow-2xl md:block lg:h-60 lg:w-44">
+          <div className="grid grid-cols-12 gap-3 md:gap-5">
+            {/* Main image */}
+            <div className="relative col-span-12 overflow-hidden rounded-md md:col-span-8">
+              <div className="relative aspect-[16/10] w-full overflow-hidden md:aspect-[3/2]">
                 <ParallaxImage
-                  src={secondaryCover}
-                  alt="Detail — joinery"
-                  strength={0.5}
+                  src={cover}
+                  alt="Featured kitchen — Woodmore Kitchens portfolio"
+                  priority
+                  strength={0.3}
                   className="size-full"
                 />
               </div>
-            )}
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+            </div>
+
+            {/* Side stack — two stacked landscape companions, total height
+                matches the main image. */}
+            <div className="col-span-12 grid grid-cols-2 gap-3 md:col-span-4 md:grid-cols-1 md:gap-5">
+              {secondaryCover && (
+                <div className="relative overflow-hidden rounded-md">
+                  <div className="relative aspect-[16/10] w-full">
+                    <ParallaxImage
+                      src={secondaryCover}
+                      alt="A second kitchen from the portfolio"
+                      strength={0.4}
+                      className="size-full"
+                    />
+                  </div>
+                </div>
+              )}
+              {tertiaryCover && (
+                <div className="relative overflow-hidden rounded-md">
+                  <div className="relative aspect-[16/10] w-full">
+                    <ParallaxImage
+                      src={tertiaryCover}
+                      alt="A third kitchen from the portfolio"
+                      strength={0.5}
+                      className="size-full"
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
 
-          <div className="mt-6 flex items-end justify-between text-xs uppercase tracking-widest2 text-muted-foreground">
-            <span>Scroll</span>
-            <ArrowDownRight className="size-4 text-accent" />
-            <span>23 Projects · 2008 — Today</span>
+          {/* Caption row — subtle, no numbering */}
+          <div className="mt-6 flex items-center justify-between text-xs uppercase tracking-widest2 text-muted-foreground">
+            <span className="inline-flex items-center gap-2">
+              <ArrowDownRight className="size-4 text-accent" />
+              Scroll for more
+            </span>
+            <span>Made in Monroe, Washington</span>
           </div>
         </motion.div>
       )}

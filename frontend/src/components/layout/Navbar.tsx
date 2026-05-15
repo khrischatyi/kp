@@ -8,7 +8,6 @@ import { cn } from "@/lib/utils";
 
 const LINKS = [
   { to: "/", label: "Home" },
-  { to: "/kitchens", label: "Kitchens" },
   { to: "/galleries", label: "Galleries" },
   { to: "/contacts", label: "Contact" },
 ];
@@ -49,10 +48,10 @@ export function Navbar() {
             <Link
               to="/"
               className="group inline-flex items-baseline gap-2 font-display"
-              aria-label="Atelier Kitchens — Home"
+              aria-label="Woodmore Kitchens — Home"
             >
               <span className="text-xl font-medium tracking-tight md:text-2xl">
-                Atelier
+                Woodmore
               </span>
               <span className="text-xs uppercase tracking-widest2 text-muted-foreground transition-colors group-hover:text-accent">
                 Kitchens
@@ -148,7 +147,7 @@ export function Navbar() {
                 ))}
               </nav>
               <div className="mt-10 border-t border-border/60 pt-6 text-xs uppercase tracking-widest2 text-muted-foreground">
-                Seattle · Bellevue · Mercer Island
+                Monroe · Snohomish County · Greater Seattle
               </div>
             </motion.div>
           </motion.div>

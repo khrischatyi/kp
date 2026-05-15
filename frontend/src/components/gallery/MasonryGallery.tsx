@@ -90,9 +90,7 @@ function ProjectBlock({
         className="mb-8 flex flex-col gap-2 md:mb-12 md:flex-row md:items-end md:justify-between"
       >
         <div className="flex items-end gap-4">
-          <span className="font-display text-xl text-accent md:text-2xl">
-            {String(project.order).padStart(2, "0")}
-          </span>
+          <span className="h-px w-12 bg-accent" aria-hidden />
           <h2 className="font-display text-3xl text-balance md:text-5xl">
             {project.name}
           </h2>
@@ -131,10 +129,7 @@ function ProjectBlock({
                 className="ring-1 ring-border/40 transition-transform duration-700 ease-editorial group-hover:scale-[1.012]"
               />
               <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                <span className="absolute bottom-3 left-4 text-[11px] uppercase tracking-widest2 text-white/95">
-                  View
-                </span>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/35 to-transparent" />
               </div>
             </motion.button>
           );

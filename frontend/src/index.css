@@ -51,6 +51,15 @@
     text-rendering: optimizeLegibility;
   }
 
+  /* Gentle scroll magnetism — only desktop, only "proximity" so other
+     sections still scroll naturally; only elements with `snap-start` get
+     pulled toward. */
+  @media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-snap-type: y proximity;
+    }
+  }
+
   body {
     @apply bg-background text-foreground font-sans;
     font-feature-settings: "ss01", "cv11";

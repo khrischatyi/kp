@@ -23,14 +23,24 @@ export default function Home() {
     return () => { cancelled = true; };
   }, []);
 
-  const cover = projects[0]?.cover ?? null;
-  const secondary = projects[1]?.cover ?? null;
-  const cta = projects[Math.min(4, projects.length - 1)]?.cover ?? null;
+  // Hero composition — pick landscape kitchen photos. Smith Tower's cover is a
+  // cityscape (not a kitchen), so it's excluded; Tomlin's first image is the
+  // only known portrait, also excluded from landscape slots.
+  const pickProject = (slugs: string[], fallback: number) =>
+    projects.find((p) => slugs.includes(p.slug)) ?? projects[fallback];
+  const heroProject     = pickProject(["beaver-lake", "eco-ridge", "clide-hill"], 4);
+  const heroSecondary   = pickProject(["clide-hill", "northgate", "mcneely"], 2);
+  const heroTertiary    = pickProject(["west-seattle", "northgate", "mcneely"], 14);
+
+  const cover     = heroProject?.cover ?? null;
+  const secondary = heroSecondary?.cover ?? null;
+  const tertiary  = heroTertiary?.cover ?? null;
+  const cta       = projects[Math.min(6, projects.length - 1)]?.cover ?? null;
 
   return (
     <>
-      <Hero cover={cover} secondaryCover={secondary} />
-      <div className="py-10 md:py-16">
+      <Hero cover={cover} secondaryCover={secondary} tertiaryCover={tertiary} />
+      <div className="pt-8 pb-2 md:pt-12 md:pb-4">
         <Marquee
           items={[
             "Bespoke",

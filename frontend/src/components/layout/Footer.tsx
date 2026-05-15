@@ -8,13 +8,14 @@ export function Footer() {
         <div className="grid gap-12 md:grid-cols-12">
           <div className="md:col-span-5">
             <Link to="/" className="inline-flex items-baseline gap-2 font-display">
-              <span className="text-2xl">Atelier</span>
+              <span className="text-2xl">Woodmore</span>
               <span className="text-xs uppercase tracking-widest2 text-muted-foreground">
-                Kitchens
+                Kitchens LLC
               </span>
             </Link>
             <p className="mt-6 max-w-md font-display text-2xl leading-tight text-foreground/85 md:text-3xl">
-              Heirloom cabinetry, made by hand for the Pacific Northwest's most considered homes.
+              Heirloom cabinetry, made by hand in Monroe — for homes across the
+              Greater Seattle area.
             </p>
           </div>
 
@@ -24,7 +25,6 @@ export function Footer() {
             </h4>
             <ul className="mt-5 space-y-3 text-sm">
               <li><Link className="hover:text-accent transition-colors" to="/">Home</Link></li>
-              <li><Link className="hover:text-accent transition-colors" to="/kitchens">Kitchens</Link></li>
               <li><Link className="hover:text-accent transition-colors" to="/galleries">Galleries</Link></li>
               <li><Link className="hover:text-accent transition-colors" to="/contacts">Contact</Link></li>
             </ul>
@@ -35,33 +35,32 @@ export function Footer() {
               Studio
             </h4>
             <ul className="mt-5 space-y-3 text-sm">
-              <li className="flex items-center gap-3 text-foreground/80">
-                <MapPin className="size-4 text-accent" />
-                Seattle · Bellevue · Mercer Island
+              <li className="flex items-start gap-3 text-foreground/80">
+                <MapPin className="mt-0.5 size-4 text-accent" />
+                <span>
+                  17631 147th St SE<br />
+                  Monroe, WA 98272
+                </span>
               </li>
               <li className="flex items-center gap-3 text-foreground/80">
                 <Mail className="size-4 text-accent" />
-                <a href="mailto:hello@atelierkitchens.com" className="hover:text-accent">
-                  hello@atelierkitchens.com
+                <a href="mailto:litwinshop@gmail.com" className="hover:text-accent">
+                  litwinshop@gmail.com
                 </a>
               </li>
               <li className="flex items-center gap-3 text-foreground/80">
                 <Phone className="size-4 text-accent" />
-                <a href="tel:+12065551234" className="hover:text-accent">
-                  +1 (206) 555 · 1234
+                <a href="tel:+12068185057" className="hover:text-accent">
+                  206.818.5057
                 </a>
-              </li>
-              <li className="flex items-center gap-3 text-foreground/80">
-                <Instagram className="size-4 text-accent" />
-                <a href="#" className="hover:text-accent">@atelier.kitchens</a>
               </li>
             </ul>
           </div>
         </div>
 
         <div className="mt-16 flex flex-col items-start justify-between gap-3 border-t border-border/60 pt-6 text-xs uppercase tracking-widest2 text-muted-foreground md:flex-row md:items-center">
-          <span>© {new Date().getFullYear()} Atelier Kitchens · All rights reserved.</span>
-          <span>Crafted in Seattle</span>
+          <span>© {new Date().getFullYear()} Woodmore Kitchens LLC · All rights reserved.</span>
+          <span>Crafted in Monroe, Washington</span>
         </div>
       </div>
     </footer>
