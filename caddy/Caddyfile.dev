@@ -1,0 +1,46 @@
+# =============================================================================
+# Caddy — Development reverse proxy
+# Routes:
+#   /api/*     → FastAPI backend (uvicorn :8000)
+#   /photos/*  → static photo directory mounted at /srv/photos
+#   /*         → Vite dev server (HMR via WebSocket)
+# =============================================================================
+
+{
+    auto_https off
+    admin off
+}
+
+:80 {
+    encode zstd gzip
+
+    # ----- API ----------------------------------------------------------- #
+    handle /api/* {
+        reverse_proxy backend:8000
+    }
+
+    # ----- Photos (gallery source) --------------------------------------- #
+    handle_path /photos/* {
+        root * /srv/photos
+        header Cache-Control "public, max-age=86400"
+        file_server browse
+    }
+
+    # ----- Frontend (Vite dev server, HMR-capable) ----------------------- #
+    handle {
+        reverse_proxy frontend:5173 {
+            header_up Host {host}
+            header_up X-Real-IP {remote_host}
+            transport http {
+                # Long timeouts to keep HMR websocket alive
+                read_timeout 86400s
+            }
+        }
+    }
+
+    log {
+        output stdout
+        format console
+        level INFO
+    }
+}

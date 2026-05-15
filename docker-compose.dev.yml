@@ -1,0 +1,82 @@
+name: kitchen-portfolio-dev
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - kitchen_db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks: [kitchen]
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: ../docker/backend.dev.Dockerfile
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      PHOTOS_DIR: /photos
+      DATABASE_URL: ${DATABASE_URL}
+    volumes:
+      - ./backend:/app
+      - ./photos:/photos:ro
+    depends_on:
+      db:
+        condition: service_healthy
+    expose: ["8000"]
+    command: >
+      sh -c "alembic upgrade head &&
+             uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
+    networks: [kitchen]
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: ../docker/frontend.dev.Dockerfile
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      VITE_API_BASE_URL: ${VITE_API_BASE_URL}
+      VITE_PHOTOS_BASE_URL: ${VITE_PHOTOS_BASE_URL}
+      VITE_SITE_NAME: ${VITE_SITE_NAME}
+      VITE_SITE_DESCRIPTION: ${VITE_SITE_DESCRIPTION}
+    volumes:
+      - ./frontend:/app
+      - frontend_node_modules:/app/node_modules
+    expose: ["5173"]
+    command: sh -c "npm install && npm run dev -- --host 0.0.0.0 --port 5173"
+    networks: [kitchen]
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "${CADDY_HTTP_PORT}:80"
+    volumes:
+      - ./caddy/Caddyfile.dev:/etc/caddy/Caddyfile:ro
+      - ./photos:/srv/photos:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - backend
+      - frontend
+    networks: [kitchen]
+
+volumes:
+  kitchen_db_data:
+  frontend_node_modules:
+  caddy_data:
+  caddy_config:
+
+networks:
+  kitchen:
+    driver: bridge

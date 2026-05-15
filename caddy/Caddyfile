@@ -1,0 +1,61 @@
+# =============================================================================
+# Caddy — Production reverse proxy
+#   /api/*     → FastAPI backend
+#   /photos/*  → static photo files
+#   /*         → React SPA (built static files)
+# =============================================================================
+
+{
+    email admin@{$APP_DOMAIN}
+}
+
+{$APP_DOMAIN} {
+    encode zstd gzip
+
+    # ----- Security headers --------------------------------------------- #
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "DENY"
+        Referrer-Policy "strict-origin-when-cross-origin"
+        Permissions-Policy "camera=(), microphone=(), geolocation=()"
+        Content-Security-Policy "default-src 'self'; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self'"
+        -Server
+    }
+
+    # ----- API ----------------------------------------------------------- #
+    handle /api/* {
+        reverse_proxy backend:8000
+    }
+
+    # ----- Photos -------------------------------------------------------- #
+    handle_path /photos/* {
+        root * /srv/photos
+        header Cache-Control "public, max-age=31536000, immutable"
+        file_server
+    }
+
+    # ----- Frontend SPA -------------------------------------------------- #
+    handle {
+        root * /srv/frontend
+        try_files {path} /index.html
+        file_server
+
+        # Hashed asset filenames → cache aggressively
+        @assets path /assets/*
+        header @assets Cache-Control "public, max-age=31536000, immutable"
+    }
+
+    log {
+        output stdout
+        format console
+        level INFO
+    }
+}
+
+# Health endpoint accessible without TLS for orchestrators
+:80 {
+    @health path /healthz
+    respond @health "ok" 200
+    redir https://{host}{uri}
+}
