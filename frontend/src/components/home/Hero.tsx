@@ -110,7 +110,7 @@ export function Hero({ cover, secondaryCover, tertiaryCover }: HeroProps) {
               <div className="relative aspect-[16/10] w-full overflow-hidden md:aspect-[3/2]">
                 <ParallaxImage
                   src={cover}
-                  alt="Featured kitchen — Woodmore Kitchens portfolio"
+                  alt="Featured kitchen — SCI Seattle Cabinets & Interiors portfolio"
                   priority
                   strength={0.3}
                   className="size-full"

@@ -1,10 +1,10 @@
 [project]
 name = "kitchen-portfolio-backend"
 version = "0.1.0"
-description = "FastAPI backend for the Atelier Kitchens portfolio."
+description = "FastAPI backend for the SCI Seattle Cabinets & Interiors portfolio."
 requires-python = ">=3.12"
 readme = "README.md"
-authors = [{ name = "Atelier Kitchens" }]
+authors = [{ name = "SCI Seattle Cabinets & Interiors" }]
 
 dependencies = [
     "fastapi==0.115.6",

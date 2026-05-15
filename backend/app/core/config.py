@@ -19,7 +19,7 @@ class Settings(BaseSettings):
     )
 
     app_env: str = Field(default="development")
-    app_name: str = Field(default="Atelier Kitchens")
+    app_name: str = Field(default="SCI Seattle Cabinets & Interiors")
     app_domain: str = Field(default="localhost")
 
     backend_host: str = "0.0.0.0"

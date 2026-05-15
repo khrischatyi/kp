@@ -8,9 +8,9 @@ export function Footer() {
         <div className="grid gap-12 md:grid-cols-12">
           <div className="md:col-span-5">
             <Link to="/" className="inline-flex items-baseline gap-2 font-display">
-              <span className="text-2xl">Woodmore</span>
+              <span className="text-2xl">SCI</span>
               <span className="text-xs uppercase tracking-widest2 text-muted-foreground">
-                Kitchens LLC
+                Seattle Cabinets &amp; Interiors
               </span>
             </Link>
             <p className="mt-6 max-w-md font-display text-2xl leading-tight text-foreground/85 md:text-3xl">
@@ -59,7 +59,7 @@ export function Footer() {
         </div>
 
         <div className="mt-16 flex flex-col items-start justify-between gap-3 border-t border-border/60 pt-6 text-xs uppercase tracking-widest2 text-muted-foreground md:flex-row md:items-center">
-          <span>© {new Date().getFullYear()} Woodmore Kitchens LLC · All rights reserved.</span>
+          <span>© {new Date().getFullYear()} SCI Seattle Cabinets &amp; Interiors · All rights reserved.</span>
           <span>Crafted in Monroe, Washington</span>
         </div>
       </div>

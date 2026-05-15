@@ -48,13 +48,13 @@ export function Navbar() {
             <Link
               to="/"
               className="group inline-flex items-baseline gap-2 font-display"
-              aria-label="Woodmore Kitchens — Home"
+              aria-label="SCI Seattle Cabinets & Interiors — Home"
             >
               <span className="text-xl font-medium tracking-tight md:text-2xl">
-                Woodmore
+                SCI
               </span>
-              <span className="text-xs uppercase tracking-widest2 text-muted-foreground transition-colors group-hover:text-accent">
-                Kitchens
+              <span className="hidden text-[10px] uppercase tracking-widest2 text-muted-foreground transition-colors group-hover:text-accent md:inline">
+                Seattle Cabinets &amp; Interiors
               </span>
             </Link>
 

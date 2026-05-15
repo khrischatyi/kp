@@ -6,6 +6,7 @@ import * as React from "react";
 import { Reveal } from "@/components/shared/Reveal";
 import { SectionLabel } from "@/components/shared/SectionLabel";
 import { SmartImage } from "@/components/shared/SmartImage";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { cn } from "@/lib/utils";
 import type { Project } from "@/types/api";
 
@@ -76,38 +77,40 @@ interface PanelProps {
 function ProjectPanel({ project, index }: PanelProps) {
   const ref = React.useRef<HTMLElement>(null);
   const reduced = useReducedMotion();
+  const isDesktop = useMediaQuery("(min-width: 768px)");
   const reversed = index % 2 === 1;
+
+  // Parallax only fires on desktop. On touch devices the y-transforms fight
+  // the user's finger and make scroll feel sluggish.
+  const enableParallax = isDesktop && !reduced;
 
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
   });
 
-  // Slow parallax on the image while the panel is in view
   const imgY = useTransform(
     scrollYProgress,
     [0, 1],
-    reduced ? ["0%", "0%"] : ["-6%", "6%"],
+    enableParallax ? ["-6%", "6%"] : ["0%", "0%"],
   );
-  // Subtle drift on the text in the opposite direction
   const textY = useTransform(
     scrollYProgress,
     [0, 1],
-    reduced ? ["0%", "0%"] : ["8%", "-8%"],
+    enableParallax ? ["8%", "-8%"] : ["0%", "0%"],
   );
 
   return (
     <article
       ref={ref}
-      className="relative flex min-h-[88svh] snap-start scroll-mt-20 items-center py-16 md:min-h-svh md:py-0"
+      className={cn(
+        "relative scroll-mt-20 py-10",
+        // Desktop: full viewport panel + gentle snap. Mobile: natural flow.
+        "md:flex md:min-h-svh md:snap-start md:items-center md:py-0",
+      )}
     >
       <div className="container">
-        <div
-          className={cn(
-            "grid grid-cols-12 items-center gap-8 md:gap-12",
-            reversed ? "" : "",
-          )}
-        >
+        <div className="grid grid-cols-12 items-center gap-6 md:gap-12">
           {/* Image */}
           <motion.div
             style={{ y: imgY }}

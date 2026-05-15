@@ -1,4 +1,4 @@
-# Atelier Kitchens — Portfolio
+# SCI Seattle Cabinets & Interiors — Portfolio
 
 A premium, cinematic portfolio site for a custom kitchen cabinetry studio.
 Built as a production-ready, container-first stack: **FastAPI · React (Vite) ·
@@ -156,4 +156,4 @@ All services read from the **single shared `.env`**. Key variables:
 
 ## License
 
-Built for Atelier Kitchens.
+Built for SCI Seattle Cabinets & Interiors.

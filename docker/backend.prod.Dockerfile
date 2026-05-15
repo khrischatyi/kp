@@ -5,25 +5,28 @@ FROM python:3.12-slim AS builder
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
     PIP_DISABLE_PIP_VERSION_CHECK=1 \
-    PIP_NO_CACHE_DIR=1
+    PIP_NO_CACHE_DIR=1 \
+    VIRTUAL_ENV=/opt/venv \
+    PATH="/opt/venv/bin:$PATH"
 
 WORKDIR /build
 
 RUN apt-get update \
  && apt-get install -y --no-install-recommends build-essential libpq-dev \
- && rm -rf /var/lib/apt/lists/*
-
-RUN pip install --no-cache-dir uv
+ && rm -rf /var/lib/apt/lists/* \
+ && python -m venv "$VIRTUAL_ENV" \
+ && pip install --no-cache-dir uv
 
 COPY pyproject.toml ./
-RUN uv pip install --system --no-cache --target /deps .
+RUN uv pip install --no-cache .
 
 # ------------------------------------------------------------------ runtime #
 FROM python:3.12-slim AS runtime
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONPATH=/deps:/app
+    VIRTUAL_ENV=/opt/venv \
+    PATH="/opt/venv/bin:$PATH"
 
 WORKDIR /app
 
@@ -32,7 +35,7 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/* \
  && useradd --create-home --shell /bin/bash app
 
-COPY --from=builder /deps /deps
+COPY --from=builder /opt/venv /opt/venv
 COPY --chown=app:app . /app
 
 USER app
