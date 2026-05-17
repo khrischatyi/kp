@@ -33,7 +33,7 @@ export function CTA({ background }: { background: string | null }) {
         </div>
         <div className="col-span-12 mt-6 flex flex-wrap items-center gap-4 md:col-span-3 md:mt-0 md:justify-end">
           <Reveal delay={0.15}>
-            <Button asChild size="lg" variant="accent">
+            <Button asChild size="lg" variant="primary">
               <Link to="/contacts">
                 Start the conversation
                 <ArrowRight className="size-4" />

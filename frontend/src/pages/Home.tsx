@@ -36,7 +36,7 @@ export default function Home() {
             "Hand-Joined",
             "Pacific Northwest",
             "Solid Wood",
-            "Made in Ballard",
+            "Made in Monroe",
           ]}
         />
       </div>

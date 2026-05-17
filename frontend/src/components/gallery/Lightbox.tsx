@@ -1,4 +1,5 @@
 import * as React from "react";
+import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 
@@ -38,7 +39,7 @@ export function Lightbox({
 
   const current = photos[index];
 
-  return (
+  return createPortal(
     <AnimatePresence>
       {open && current && (
         <motion.div
@@ -115,6 +116,7 @@ export function Lightbox({
           </button>
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body,
   );
 }

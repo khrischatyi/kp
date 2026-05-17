@@ -18,7 +18,7 @@ const STEPS = [
     n: "III",
     title: "Craft",
     body:
-      "Eight to fourteen weeks in our Ballard workshop. Solid-wood frames, dovetailed boxes, finishes hand-rubbed to depth.",
+      "Eight to fourteen weeks in our Monroe workshop. Solid-wood frames, dovetailed boxes, finishes hand-rubbed to depth.",
   },
   {
     n: "IV",
