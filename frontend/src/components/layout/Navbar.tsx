@@ -49,13 +49,13 @@ export function Navbar() {
           <div className="container flex h-16 items-center justify-between md:h-20">
             <Link
               to="/"
-              className="group inline-flex items-baseline gap-2 font-display"
+              className="group inline-flex flex-col font-display leading-none"
               aria-label="SCI Seattle Cabinets & Interiors — Home"
             >
               <span className="text-xl font-medium tracking-tight md:text-2xl">
                 SCI
               </span>
-              <span className="hidden text-[10px] uppercase tracking-widest2 text-muted-foreground transition-colors group-hover:text-accent md:inline">
+              <span className="hidden text-[9px] uppercase tracking-widest2 text-muted-foreground transition-colors group-hover:text-accent md:inline">
                 Seattle Cabinets &amp; Interiors
               </span>
             </Link>

@@ -7,9 +7,9 @@ export function Footer() {
       <div className="container py-16 md:py-24">
         <div className="grid gap-12 md:grid-cols-12">
           <div className="md:col-span-5">
-            <Link to="/" className="inline-flex items-baseline gap-2 font-display">
+            <Link to="/" className="inline-flex flex-col font-display leading-none">
               <span className="text-2xl">SCI</span>
-              <span className="text-xs uppercase tracking-widest2 text-muted-foreground">
+              <span className="text-[9px] uppercase tracking-widest2 text-muted-foreground">
                 Seattle Cabinets &amp; Interiors
               </span>
             </Link>
@@ -26,6 +26,8 @@ export function Footer() {
             <ul className="mt-5 space-y-3 text-sm">
               <li><Link className="hover:text-accent transition-colors" to="/">Home</Link></li>
               <li><Link className="hover:text-accent transition-colors" to="/galleries">Galleries</Link></li>
+              <li><Link className="hover:text-accent transition-colors" to="/about">About</Link></li>
+              <li><Link className="hover:text-accent transition-colors" to="/careers">Careers</Link></li>
               <li><Link className="hover:text-accent transition-colors" to="/contacts">Contact</Link></li>
             </ul>
           </div>
