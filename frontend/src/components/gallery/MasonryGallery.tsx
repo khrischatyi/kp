@@ -90,7 +90,6 @@ function ProjectBlock({
         className="mb-8 flex flex-col gap-2 md:mb-12 md:flex-row md:items-end md:justify-between"
       >
         <div className="flex items-end gap-4">
-          <span className="h-px w-12 bg-accent" aria-hidden />
           <h2 className="font-display text-3xl text-balance md:text-5xl">
             {project.name}
           </h2>
