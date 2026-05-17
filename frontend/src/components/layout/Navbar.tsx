@@ -20,7 +20,18 @@ export function Navbar() {
   const bg = useTransform(scrollY, [0, 120], ["0", "0.75"]);
   const borderOpacity = useTransform(scrollY, [0, 120], [0, 0.6]);
   const [open, setOpen] = React.useState(false);
+  const [scrolled, setScrolled] = React.useState(false);
   const location = useLocation();
+  const isHome = location.pathname === "/";
+
+  // Track scroll to flip navbar colors when over the dark hero
+  React.useEffect(() => {
+    const unsubscribe = scrollY.on("change", (v) => setScrolled(v > 80));
+    return unsubscribe;
+  }, [scrollY]);
+
+  // When on homepage and not scrolled, use light text for dark hero bg
+  const heroOverlay = isHome && !scrolled;
 
   // Close mobile menu on route change
   React.useEffect(() => setOpen(false), [location.pathname]);
@@ -52,10 +63,16 @@ export function Navbar() {
               className="group inline-flex flex-col font-display leading-none"
               aria-label="SCI Seattle Cabinets & Interiors — Home"
             >
-              <span className="text-xl font-medium tracking-tight md:text-2xl">
+              <span className={cn(
+                "text-xl font-medium tracking-tight transition-colors duration-300 md:text-2xl",
+                heroOverlay ? "text-white" : "text-foreground",
+              )}>
                 SCI
               </span>
-              <span className="hidden text-[9px] uppercase tracking-widest2 text-muted-foreground transition-colors group-hover:text-accent md:inline">
+              <span className={cn(
+                "hidden text-[9px] uppercase tracking-widest2 transition-colors duration-300 group-hover:text-accent md:inline",
+                heroOverlay ? "text-white/60" : "text-muted-foreground",
+              )}>
                 Seattle Cabinets &amp; Interiors
               </span>
             </Link>
@@ -70,10 +87,10 @@ export function Navbar() {
                     end={l.to === "/"}
                     className={({ isActive }) =>
                       cn(
-                        "relative text-[13px] uppercase tracking-widest2 transition-colors",
-                        isActive
-                          ? "text-foreground"
-                          : "text-muted-foreground hover:text-foreground",
+                        "relative text-[13px] uppercase tracking-widest2 transition-colors duration-300",
+                        heroOverlay
+                          ? isActive ? "text-white" : "text-white/60 hover:text-white"
+                          : isActive ? "text-foreground" : "text-muted-foreground hover:text-foreground",
                       )
                     }
                   >
@@ -93,13 +110,18 @@ export function Navbar() {
                 ))}
               </nav>
 
-              <ToggleTheme />
+              <ToggleTheme heroOverlay={heroOverlay} />
               <button
                 type="button"
                 aria-label={open ? "Close menu" : "Open menu"}
                 aria-expanded={open}
                 onClick={() => setOpen((s) => !s)}
-                className="inline-flex size-10 items-center justify-center rounded-full border border-border/60 text-foreground transition-colors hover:bg-foreground/[0.05] md:hidden"
+                className={cn(
+                  "inline-flex size-10 items-center justify-center rounded-full border transition-colors duration-300 md:hidden",
+                  heroOverlay
+                    ? "border-white/30 text-white hover:bg-white/10"
+                    : "border-border/60 text-foreground hover:bg-foreground/[0.05]",
+                )}
               >
                 {open ? <X className="size-4" /> : <Menu className="size-4" />}
               </button>

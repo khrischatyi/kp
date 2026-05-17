@@ -113,14 +113,14 @@ export function Hero() {
             workshop.
           </p>
           <div className="col-span-12 flex flex-wrap items-center gap-4 md:col-span-7 md:justify-end">
-            <Button asChild size="lg" variant="primary">
+            <Button asChild size="lg" className="bg-white text-black hover:bg-white/90 shadow-[0_8px_24px_-12px_rgba(0,0,0,0.4)]">
               <Link to="/galleries">
                 View the Portfolio
                 <ArrowRight className="size-4" strokeWidth={1.75} />
               </Link>
             </Button>
-            <Button asChild size="lg" variant="outline">
-              <Link to="/contacts" className="!border-white/25 !text-white hover:!bg-white/[0.08] hover:!border-white/50">
+            <Button asChild size="lg" variant="outline" className="border-white/25 text-white hover:border-white/50 hover:bg-white/[0.08]">
+              <Link to="/contacts">
                 Begin a Project
               </Link>
             </Button>

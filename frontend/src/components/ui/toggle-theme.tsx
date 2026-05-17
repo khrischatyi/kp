@@ -13,7 +13,7 @@ const THEME_OPTIONS = [
   { icon: MoonStarIcon, value: "dark" as const, label: "Dark" },
 ];
 
-export function ToggleTheme() {
+export function ToggleTheme({ heroOverlay = false }: { heroOverlay?: boolean }) {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
 
@@ -28,7 +28,12 @@ export function ToggleTheme() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-      className="bg-muted/70 inline-flex items-center overflow-hidden rounded-full border border-border/60 backdrop-blur-md"
+      className={cn(
+        "inline-flex items-center overflow-hidden rounded-full border backdrop-blur-md transition-colors duration-300",
+        heroOverlay
+          ? "border-white/20 bg-white/10"
+          : "border-border/60 bg-muted/70",
+      )}
       role="radiogroup"
       aria-label="Theme"
     >
@@ -37,10 +42,10 @@ export function ToggleTheme() {
           key={option.value}
           type="button"
           className={cn(
-            "relative flex size-8 cursor-pointer items-center justify-center rounded-full transition-colors",
-            theme === option.value
-              ? "text-foreground"
-              : "text-muted-foreground hover:text-foreground",
+            "relative flex size-8 cursor-pointer items-center justify-center rounded-full transition-colors duration-300",
+            heroOverlay
+              ? theme === option.value ? "text-white" : "text-white/50 hover:text-white"
+              : theme === option.value ? "text-foreground" : "text-muted-foreground hover:text-foreground",
           )}
           role="radio"
           aria-checked={theme === option.value}
@@ -51,7 +56,12 @@ export function ToggleTheme() {
             <motion.span
               layoutId="theme-pill"
               transition={{ type: "spring", bounce: 0.18, duration: 0.6 }}
-              className="absolute inset-0 rounded-full border border-foreground/15 bg-background shadow-sm"
+              className={cn(
+                "absolute inset-0 rounded-full border shadow-sm transition-colors duration-300",
+                heroOverlay
+                  ? "border-white/20 bg-white/15"
+                  : "border-foreground/15 bg-background",
+              )}
             />
           )}
           <option.icon className="relative z-10 size-3.5" strokeWidth={1.75} />
