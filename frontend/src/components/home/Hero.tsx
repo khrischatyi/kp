@@ -5,33 +5,71 @@ import { ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
-const HERO_IMAGES = [
-  "/photos/2 Clide Hill/CLYDE HILL1.jpg",
-  "/photos/4 beaver lake/Kitchen Modified Shaker Island with Walnut Butcher Block.jpg",
-  "/photos/19 mid century/MID CENTUREY 2.jpg",
-  "/photos/15 edmonds/Edmonds_House_13D.jpg",
-  "/photos/18 jouce/Kitchen Bridal Trails 1.jpg",
+const HERO_SLIDES = [
+  { src: "/photos/hero/clyde-hill.jpg",    blur: "/photos/hero/clyde-hill-blur.jpg" },
+  { src: "/photos/hero/beaver-lake.jpg",   blur: "/photos/hero/beaver-lake-blur.jpg" },
+  { src: "/photos/hero/mid-century.jpg",   blur: "/photos/hero/mid-century-blur.jpg" },
+  { src: "/photos/hero/edmonds.jpg",       blur: "/photos/hero/edmonds-blur.jpg" },
+  { src: "/photos/hero/bridal-trails.jpg", blur: "/photos/hero/bridal-trails-blur.jpg" },
 ];
 
 const SLIDE_DURATION = 6000;
+
+/** Preload an image and resolve when decoded. */
+function preload(src: string): Promise<void> {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.src = src;
+    img.onload = () => resolve();
+    img.onerror = () => resolve();
+  });
+}
 
 export function Hero() {
   const ref = React.useRef<HTMLElement>(null);
   const reduced = useReducedMotion();
   const [current, setCurrent] = React.useState(0);
+  const [loadedSet, setLoadedSet] = React.useState<Set<number>>(new Set());
 
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const titleY = useTransform(scrollYProgress, [0, 1], reduced ? [0, 0] : [0, -90]);
   const subY = useTransform(scrollYProgress, [0, 1], reduced ? [0, 0] : [0, -50]);
   const fade = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
+  // Preload first image immediately, then the rest in background
+  React.useEffect(() => {
+    preload(HERO_SLIDES[0].src).then(() => {
+      setLoadedSet((s) => new Set(s).add(0));
+    });
+    // Preload remaining slides in background
+    HERO_SLIDES.forEach((slide, i) => {
+      if (i === 0) return;
+      preload(slide.src).then(() => {
+        setLoadedSet((s) => new Set(s).add(i));
+      });
+    });
+  }, []);
+
+  // Preload link for first image in <head>
+  React.useEffect(() => {
+    const link = document.createElement("link");
+    link.rel = "preload";
+    link.as = "image";
+    link.href = HERO_SLIDES[0].src;
+    document.head.appendChild(link);
+    return () => { document.head.removeChild(link); };
+  }, []);
+
   React.useEffect(() => {
     if (reduced) return;
     const timer = setInterval(() => {
-      setCurrent((i) => (i + 1) % HERO_IMAGES.length);
+      setCurrent((i) => (i + 1) % HERO_SLIDES.length);
     }, SLIDE_DURATION);
     return () => clearInterval(timer);
   }, [reduced]);
+
+  const slide = HERO_SLIDES[current];
+  const isLoaded = loadedSet.has(current);
 
   return (
     <section
@@ -40,23 +78,32 @@ export function Hero() {
     >
       {/* Fullscreen background slideshow */}
       <div className="absolute inset-0" aria-hidden>
+        {/* Blurred placeholder — always visible instantly */}
+        <img
+          src={slide.blur}
+          alt=""
+          className="absolute inset-0 size-full scale-105 object-cover blur-sm"
+          draggable={false}
+        />
+
         <AnimatePresence initial={false}>
           <motion.div
             key={current}
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            animate={{ opacity: isLoaded ? 1 : 0 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 1.2, ease: "easeInOut" }}
             className="absolute inset-0"
           >
             <motion.img
-              src={HERO_IMAGES[current]}
+              src={slide.src}
               alt=""
               initial={{ scale: 1 }}
               animate={{ scale: reduced ? 1 : 1.08 }}
               transition={{ duration: SLIDE_DURATION / 1000, ease: "linear" }}
               className="size-full object-cover"
               draggable={false}
+              onLoad={() => setLoadedSet((s) => new Set(s).add(current))}
             />
           </motion.div>
         </AnimatePresence>
