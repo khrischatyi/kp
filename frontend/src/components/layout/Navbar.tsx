@@ -9,6 +9,8 @@ import { cn } from "@/lib/utils";
 const LINKS = [
   { to: "/", label: "Home" },
   { to: "/galleries", label: "Galleries" },
+  { to: "/about", label: "About" },
+  { to: "/careers", label: "Careers" },
   { to: "/contacts", label: "Contact" },
 ];
 
@@ -58,39 +60,39 @@ export function Navbar() {
               </span>
             </Link>
 
-            {/* Desktop nav */}
-            <nav className="hidden items-center gap-9 md:flex">
-              {LINKS.map((l) => (
-                <NavLink
-                  key={l.to}
-                  to={l.to}
-                  end={l.to === "/"}
-                  className={({ isActive }) =>
-                    cn(
-                      "relative text-[13px] uppercase tracking-widest2 transition-colors",
-                      isActive
-                        ? "text-foreground"
-                        : "text-muted-foreground hover:text-foreground",
-                    )
-                  }
-                >
-                  {({ isActive }) => (
-                    <>
-                      {l.label}
-                      {isActive && (
-                        <motion.span
-                          layoutId="navbar-underline"
-                          className="absolute -bottom-1 left-0 right-0 h-px bg-accent"
-                          transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                        />
-                      )}
-                    </>
-                  )}
-                </NavLink>
-              ))}
-            </nav>
-
             <div className="flex items-center gap-3">
+              {/* Desktop nav */}
+              <nav className="hidden items-center gap-7 md:flex">
+                {LINKS.map((l) => (
+                  <NavLink
+                    key={l.to}
+                    to={l.to}
+                    end={l.to === "/"}
+                    className={({ isActive }) =>
+                      cn(
+                        "relative text-[13px] uppercase tracking-widest2 transition-colors",
+                        isActive
+                          ? "text-foreground"
+                          : "text-muted-foreground hover:text-foreground",
+                      )
+                    }
+                  >
+                    {({ isActive }) => (
+                      <>
+                        {l.label}
+                        {isActive && (
+                          <motion.span
+                            layoutId="navbar-underline"
+                            className="absolute -bottom-1 left-0 right-0 h-px bg-accent"
+                            transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                          />
+                        )}
+                      </>
+                    )}
+                  </NavLink>
+                ))}
+              </nav>
+
               <ToggleTheme />
               <button
                 type="button"

@@ -4,6 +4,8 @@ import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import { PageTransition } from "@/components/layout/PageTransition";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
+import About from "@/pages/About";
+import Careers from "@/pages/Careers";
 import Contacts from "@/pages/Contacts";
 import Galleries from "@/pages/Galleries";
 import Home from "@/pages/Home";
@@ -17,6 +19,8 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/galleries" element={<Galleries />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/careers" element={<Careers />} />
           <Route path="/contacts" element={<Contacts />} />
           <Route path="*" element={<Home />} />
         </Routes>
