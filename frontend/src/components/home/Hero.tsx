@@ -86,7 +86,7 @@ export function Hero() {
           draggable={false}
         />
 
-        <AnimatePresence initial={false}>
+        <AnimatePresence>
           <motion.div
             key={current}
             initial={{ opacity: 0 }}
