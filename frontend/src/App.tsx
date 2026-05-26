@@ -5,6 +5,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { PageTransition } from "@/components/layout/PageTransition";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import About from "@/pages/About";
+import Admin from "@/pages/Admin";
 import Careers from "@/pages/Careers";
 import Contacts from "@/pages/Contacts";
 import Galleries from "@/pages/Galleries";
@@ -22,6 +23,7 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/careers" element={<Careers />} />
           <Route path="/contacts" element={<Contacts />} />
+          <Route path="/admin" element={<Admin />} />
           <Route path="*" element={<Home />} />
         </Routes>
         <Footer />

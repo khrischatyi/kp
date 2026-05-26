@@ -156,10 +156,6 @@ function ProjectPanel({ project, index }: PanelProps) {
               <h3 className="mt-4 font-display text-display-md text-balance leading-[0.95]">
                 {project.name}
               </h3>
-              <div className="mt-6 h-px w-12 bg-foreground/30" />
-              <p className="mt-6 text-pretty text-base leading-relaxed text-foreground/75 md:text-lg">
-                {copyFor(project)}
-              </p>
               <Link
                 to={`/galleries?project=${project.slug}`}
                 className="group mt-8 inline-flex items-center gap-2 text-sm uppercase tracking-widest2 text-foreground hover:text-accent"

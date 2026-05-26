@@ -32,6 +32,21 @@ export class ApiError extends Error {
   }
 }
 
+export interface AdminContact {
+  id: number;
+  name: string;
+  email: string;
+  phone: string | null;
+  message: string;
+  created_at: string;
+}
+
+export interface AboutContent {
+  title: string;
+  body: string;
+  updated_at: string;
+}
+
 export const api = {
   health: () => request<{ status: string }>("/health"),
 
@@ -46,5 +61,31 @@ export const api = {
     request<ContactResponse>("/contact", {
       method: "POST",
       body: JSON.stringify(payload),
+    }),
+
+  about: () => request<AboutContent>("/about"),
+
+  // Admin
+  adminLogin: (username: string, password: string) =>
+    request<{ token: string }>("/admin/login", {
+      method: "POST",
+      body: JSON.stringify({ username, password }),
+    }),
+
+  adminContacts: (token: string) =>
+    request<AdminContact[]>("/admin/contacts", {
+      headers: { Authorization: `Bearer ${token}` },
+    }),
+
+  adminGetAbout: (token: string) =>
+    request<AboutContent>("/admin/about", {
+      headers: { Authorization: `Bearer ${token}` },
+    }),
+
+  adminUpdateAbout: (token: string, data: { title: string; body: string }) =>
+    request<AboutContent>("/admin/about", {
+      method: "PUT",
+      headers: { Authorization: `Bearer ${token}` },
+      body: JSON.stringify(data),
     }),
 };
