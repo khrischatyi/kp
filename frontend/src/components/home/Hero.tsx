@@ -6,11 +6,11 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const HERO_SLIDES = [
-  { src: "/photos/hero/clyde-hill.jpg",    blur: "/photos/hero/clyde-hill-blur.jpg" },
-  { src: "/photos/hero/beaver-lake.jpg",   blur: "/photos/hero/beaver-lake-blur.jpg" },
-  { src: "/photos/hero/mid-century.jpg",   blur: "/photos/hero/mid-century-blur.jpg" },
-  { src: "/photos/hero/smith-tower.jpg",    blur: "/photos/hero/smith-tower-blur.jpg" },
-  { src: "/photos/hero/bridal-trails.jpg", blur: "/photos/hero/bridal-trails-blur.jpg" },
+  { src: "/photos/hero/bridal-trails.jpg",  blur: "/photos/hero/bridal-trails-blur.jpg" },
+  { src: "/photos/hero/sammamish.jpg",      blur: "/photos/hero/sammamish-blur.jpg" },
+  { src: "/photos/hero/madison-inset.jpg",  blur: "/photos/hero/madison-inset-blur.jpg" },
+  { src: "/photos/hero/mid-century.jpg",    blur: "/photos/hero/mid-century-blur.jpg" },
+  { src: "/photos/hero/finn-hill.jpg",      blur: "/photos/hero/finn-hill-blur.jpg" },
 ];
 
 const SLIDE_DURATION = 6000;

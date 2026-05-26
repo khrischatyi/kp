@@ -53,6 +53,7 @@ class ContactSubmission(Base):
     email: Mapped[str] = mapped_column(String(320), nullable=False)
     phone: Mapped[str | None] = mapped_column(String(64), nullable=True)
     message: Mapped[str] = mapped_column(Text, nullable=False)
+    source: Mapped[str] = mapped_column(String(32), nullable=False, server_default="contact")
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now()
     )

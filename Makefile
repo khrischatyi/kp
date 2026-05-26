@@ -106,6 +106,15 @@ clean: ## Stop containers and remove all project images/volumes
 .PHONY: clean-build
 clean-build: clean build ## Clean everything and rebuild from scratch
 
+.PHONY: deploy
+deploy: ## Build and deploy production (migrations + seed data run automatically)
+	$(DC_PROD) up --build -d
+	@echo ""
+	@echo "  ✓ Production deployed. Migrations applied automatically."
+	@echo "  ✓ Admin panel: https://$${APP_DOMAIN}/admin"
+	@echo "    Login: vladimir / (see .env or ask the team)"
+	@echo ""
+
 .PHONY: lint-backend
 lint-backend: ## Run ruff on the backend
 	$(DC_DEV) exec backend ruff check app/

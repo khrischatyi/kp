@@ -11,6 +11,7 @@ class ContactCreate(BaseModel):
     email: EmailStr
     phone: str | None = Field(default=None, max_length=64)
     message: str = Field(min_length=10, max_length=4000)
+    source: str = Field(default="contact", max_length=32)
 
 
 class ContactResponse(BaseModel):

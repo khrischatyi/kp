@@ -41,6 +41,7 @@ export default function Careers() {
         email: form.email.trim(),
         phone: form.phone.trim() || undefined,
         message: form.message.trim(),
+        source: "career",
       });
       setSuccess(true);
       setForm(EMPTY);

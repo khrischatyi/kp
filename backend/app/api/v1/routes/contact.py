@@ -26,6 +26,7 @@ def submit_contact(payload: ContactCreate, db: Session = Depends(get_db)) -> Con
         email=payload.email,
         phone=payload.phone,
         message=payload.message,
+        source=payload.source,
     )
     db.add(submission)
     db.commit()

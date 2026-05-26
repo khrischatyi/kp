@@ -38,6 +38,7 @@ export interface AdminContact {
   email: string;
   phone: string | null;
   message: string;
+  source: string;
   created_at: string;
 }
 
@@ -57,7 +58,7 @@ export const api = {
 
   project: (slug: string) => request<Project>(`/gallery/projects/${encodeURIComponent(slug)}`),
 
-  contact: (payload: ContactPayload) =>
+  contact: (payload: ContactPayload & { source?: string }) =>
     request<ContactResponse>("/contact", {
       method: "POST",
       body: JSON.stringify(payload),
@@ -72,8 +73,8 @@ export const api = {
       body: JSON.stringify({ username, password }),
     }),
 
-  adminContacts: (token: string) =>
-    request<AdminContact[]>("/admin/contacts", {
+  adminContacts: (token: string, source?: string) =>
+    request<AdminContact[]>(`/admin/contacts${source ? `?source=${source}` : ""}`, {
       headers: { Authorization: `Bearer ${token}` },
     }),
 
