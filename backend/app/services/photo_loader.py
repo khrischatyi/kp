@@ -82,8 +82,12 @@ class PhotoLoader:
         projects: list[ProjectEntry] = []
         loose: list[Path] = []
 
+        SKIP_DIRS = {"hero"}
+
         for entry in sorted(self.root.iterdir(), key=lambda p: _natural_key(p.name)):
             if entry.is_dir():
+                if entry.name.lower() in SKIP_DIRS:
+                    continue
                 project = self._load_project(entry)
                 if project:
                     projects.append(project)

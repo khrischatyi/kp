@@ -1,14 +1,33 @@
 import path from "node:path";
-import { defineConfig, loadEnv } from "vite";
+import fs from "node:fs";
+import { defineConfig, loadEnv, type Plugin } from "vite";
 import react from "@vitejs/plugin-react";
+
+/** Serve the local photos/ directory at /photos when no proxy target is reachable. */
+function localPhotosPlugin(photosRoot: string): Plugin {
+  return {
+    name: "local-photos",
+    configureServer(server) {
+      server.middlewares.use("/photos", (req, res, next) => {
+        const filePath = path.join(photosRoot, decodeURIComponent(req.url ?? ""));
+        if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
+          res.setHeader("Cache-Control", "public, max-age=3600");
+          fs.createReadStream(filePath).pipe(res);
+        } else {
+          next();
+        }
+      });
+    },
+  };
+}
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
   const apiTarget = env.VITE_API_PROXY_TARGET ?? "http://backend:8000";
-  const photosTarget = env.VITE_PHOTOS_PROXY_TARGET ?? "http://caddy:80";
+  const photosRoot = path.resolve(__dirname, "../photos");
 
   return {
-    plugins: [react()],
+    plugins: [react(), localPhotosPlugin(photosRoot)],
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "./src"),
@@ -23,10 +42,6 @@ export default defineConfig(({ mode }) => {
       proxy: {
         "/api": {
           target: apiTarget,
-          changeOrigin: true,
-        },
-        "/photos": {
-          target: photosTarget,
           changeOrigin: true,
         },
       },

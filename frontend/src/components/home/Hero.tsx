@@ -9,7 +9,7 @@ const HERO_SLIDES = [
   { src: "/photos/hero/clyde-hill.jpg",    blur: "/photos/hero/clyde-hill-blur.jpg" },
   { src: "/photos/hero/beaver-lake.jpg",   blur: "/photos/hero/beaver-lake-blur.jpg" },
   { src: "/photos/hero/mid-century.jpg",   blur: "/photos/hero/mid-century-blur.jpg" },
-  { src: "/photos/hero/edmonds.jpg",       blur: "/photos/hero/edmonds-blur.jpg" },
+  { src: "/photos/hero/smith-tower.jpg",    blur: "/photos/hero/smith-tower-blur.jpg" },
   { src: "/photos/hero/bridal-trails.jpg", blur: "/photos/hero/bridal-trails-blur.jpg" },
 ];
 
@@ -122,9 +122,7 @@ export function Hero() {
           className="col-span-12 flex items-center gap-3 text-xs uppercase tracking-widest2 text-white/60 md:col-span-6"
         >
           <span className="size-1.5 rounded-full bg-accent" />
-          <span>Seattle · Est. 2008</span>
-          <span className="h-px w-10 bg-white/30" />
-          <span>Bespoke kitchens · Heirloom cabinetry</span>
+          <span>Seattle · Est. 1996</span>
         </motion.div>
 
         {/* Title */}
@@ -136,13 +134,9 @@ export function Hero() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
-            className="font-display text-display-xl text-balance text-white"
+            className="font-display text-display-lg text-balance text-white/80"
           >
-            <span className="block">A kitchen, drawn</span>
-            <span className="block italic text-white/80">
-              from the grain of the&nbsp;
-              <span className="text-accent">wood</span>.
-            </span>
+            Your Vision — Hand Crafted
           </motion.h1>
         </motion.div>
 

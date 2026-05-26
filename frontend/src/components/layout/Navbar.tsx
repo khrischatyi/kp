@@ -7,7 +7,6 @@ import { ToggleTheme } from "@/components/ui/toggle-theme";
 import { cn } from "@/lib/utils";
 
 const LINKS = [
-  { to: "/", label: "Home" },
   { to: "/galleries", label: "Galleries" },
   { to: "/about", label: "About" },
   { to: "/careers", label: "Careers" },
