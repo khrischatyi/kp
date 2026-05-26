@@ -64,13 +64,13 @@ export function Navbar() {
               aria-label="SCI Seattle Cabinets & Interiors — Home"
             >
               <span className={cn(
-                "text-xl font-medium tracking-tight transition-colors duration-300 md:text-2xl",
+                "text-2xl font-medium tracking-tight transition-colors duration-300 md:text-3xl",
                 heroOverlay ? "text-white" : "text-foreground",
               )}>
                 SCI
               </span>
               <span className={cn(
-                "hidden text-[9px] uppercase tracking-widest2 transition-colors duration-300 group-hover:text-accent md:inline",
+                "hidden text-[10px] uppercase tracking-widest2 transition-colors duration-300 group-hover:text-accent md:inline",
                 heroOverlay ? "text-white/60" : "text-muted-foreground",
               )}>
                 Seattle Cabinets &amp; Interiors
