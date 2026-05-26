@@ -44,7 +44,7 @@ def _verify_token(authorization: str = Header(...)) -> str:
 def admin_login(payload: LoginRequest):
     pwd_hash = hashlib.sha256(payload.password.encode()).hexdigest()
     if payload.username != ADMIN_USERNAME or pwd_hash != ADMIN_PASSWORD_HASH:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid credentials")
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Wrong username or password")
     token = secrets.token_urlsafe(32)
     _active_tokens.add(token)
     logger.info("admin login successful")
