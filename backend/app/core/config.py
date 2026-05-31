@@ -30,6 +30,15 @@ class Settings(BaseSettings):
 
     database_url: str = "postgresql+psycopg://kitchen:kitchen_dev_password@db:5432/kitchen_portfolio"
 
+    # -- Email (SMTP) ------------------------------------------------------- #
+    smtp_enabled: bool = False
+    smtp_host: str = "smtp.office365.com"
+    smtp_port: int = 587
+    smtp_username: str = ""
+    smtp_password: str = ""
+    smtp_from: str = ""
+    admin_email: str = ""
+
     photos_dir: Path = Path("/photos")
 
     @property
