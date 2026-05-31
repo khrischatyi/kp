@@ -39,9 +39,6 @@ def _build_message(submission: dict[str, Any], sender: str, recipient: str) -> E
         f"\n"
         f"Message:\n"
         f"{submission['message']}\n"
-        f"\n"
-        f"—\n"
-        f"Submission ID: #{submission['id']}\n"
     )
 
     msg = EmailMessage()

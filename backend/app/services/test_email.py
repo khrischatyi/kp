@@ -34,8 +34,8 @@ def test_build_message_contact_source():
     assert "Phone:   +1-555-0100" in body
     assert "Source:  contact" in body
     assert "I love your cabinets" in body
-    assert "Submission ID: #42" in body
     assert "2026-05-30T14:00:00+00:00" in body
+    assert "Submission ID" not in body
 
 
 def test_build_message_career_source_changes_subject():
