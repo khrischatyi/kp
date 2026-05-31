@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform, useReducedMotion, AnimatePresence } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
@@ -32,7 +31,6 @@ export function Hero() {
   const [loadedSet, setLoadedSet] = React.useState<Set<number>>(new Set());
 
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const titleY = useTransform(scrollYProgress, [0, 1], reduced ? [0, 0] : [0, -90]);
   const subY = useTransform(scrollYProgress, [0, 1], reduced ? [0, 0] : [0, -50]);
   const fade = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
@@ -109,7 +107,7 @@ export function Hero() {
         </AnimatePresence>
 
         {/* Dark overlay for text readability */}
-        <div className="absolute inset-0 bg-black/55" />
+        <div className="absolute inset-0 bg-black/15" />
       </div>
 
       {/* Content */}
@@ -125,21 +123,6 @@ export function Hero() {
           <span>Seattle · Est. 1996</span>
         </motion.div>
 
-        {/* Title */}
-        <motion.div
-          className="col-span-12 md:col-span-9"
-          style={{ y: titleY, opacity: fade }}
-        >
-          <motion.h1
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
-            className="font-display text-display-lg text-balance text-white/80"
-          >
-            Your Vision — Hand Crafted
-          </motion.h1>
-        </motion.div>
-
         {/* Subtitle + CTA */}
         <motion.div
           className="col-span-12 grid grid-cols-12 items-end gap-8 md:gap-12"
@@ -149,17 +132,9 @@ export function Hero() {
           transition={{ delay: 0.5, duration: 1 }}
         >
           <p className="col-span-12 max-w-md text-pretty text-base leading-relaxed text-white/70 md:col-span-5">
-            Designing and building kitchens for homes across the Greater Seattle
-            area — every piece joined, sanded, and finished by hand in our Monroe
-            workshop.
+            Your Vision — Hand Crafted
           </p>
           <div className="col-span-12 flex flex-wrap items-center gap-4 md:col-span-7 md:justify-end">
-            <Button asChild size="lg" className="bg-white text-black hover:bg-white/90 shadow-[0_8px_24px_-12px_rgba(0,0,0,0.4)]">
-              <Link to="/galleries">
-                View the Portfolio
-                <ArrowRight className="size-4" strokeWidth={1.75} />
-              </Link>
-            </Button>
             <Button asChild size="lg" variant="outline" className="border-white/25 text-white hover:border-white/50 hover:bg-white/[0.08]">
               <Link to="/contacts">
                 Begin a Project

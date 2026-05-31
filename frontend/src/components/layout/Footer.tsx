@@ -8,9 +8,12 @@ export function Footer() {
         <div className="grid gap-12 md:grid-cols-12">
           <div className="md:col-span-5">
             <Link to="/" className="inline-flex flex-col font-display leading-none">
-              <span className="text-2xl">SCI</span>
-              <span className="text-[9px] uppercase tracking-widest2 text-muted-foreground">
+              <span className="text-3xl">SCI</span>
+              <span className="text-[10px] uppercase tracking-widest2 text-muted-foreground">
                 Seattle Cabinets &amp; Interiors
+              </span>
+              <span className="text-[10px] uppercase tracking-widest2 text-muted-foreground/70">
+                Custom Cabinetry
               </span>
             </Link>
             <p className="mt-6 max-w-md font-display text-2xl leading-tight text-foreground/85 md:text-3xl">
