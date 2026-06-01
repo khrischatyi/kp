@@ -131,10 +131,15 @@ export function Hero() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5, duration: 1 }}
         >
-          <p className="col-span-12 max-w-md text-pretty text-base leading-relaxed text-white/70 md:col-span-5">
-            Your Vision — Hand Crafted
-          </p>
-          <div className="col-span-12 flex flex-wrap items-center gap-4 md:col-span-7 md:justify-end">
+          <div className="col-span-12 md:col-span-8">
+            <h2
+              className="text-5xl font-black leading-[1.05] tracking-tight text-white md:text-7xl"
+              style={{ fontFamily: 'Impact, "Haettenschweiler", "Arial Narrow Bold", sans-serif' }}
+            >
+              Your Vision — Hand Crafted
+            </h2>
+          </div>
+          <div className="col-span-12 flex flex-wrap items-center gap-4 md:col-span-4 md:justify-end">
             <Button asChild size="lg" variant="outline" className="border-white/25 text-white hover:border-white/50 hover:bg-white/[0.08]">
               <Link to="/contacts">
                 Begin a Project
