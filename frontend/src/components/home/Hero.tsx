@@ -136,7 +136,7 @@ export function Hero() {
               className="text-5xl font-black leading-[1.05] tracking-tight text-white md:text-7xl"
               style={{ fontFamily: 'Impact, "Haettenschweiler", "Arial Narrow Bold", sans-serif' }}
             >
-              Your Vision — Hand Crafted
+              Your Vision,<br className="md:hidden" /> Hand Crafted
             </h2>
           </div>
           <div className="col-span-12 flex flex-wrap items-center gap-4 md:col-span-4 md:justify-end">
