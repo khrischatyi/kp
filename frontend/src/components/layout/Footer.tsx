@@ -10,10 +10,7 @@ export function Footer() {
             <Link to="/" className="inline-flex flex-col font-display leading-none">
               <span className="text-3xl">SCI</span>
               <span className="text-[10px] uppercase tracking-widest2 text-muted-foreground">
-                Seattle Cabinets &amp; Interiors
-              </span>
-              <span className="text-[10px] uppercase tracking-widest2 text-muted-foreground/70">
-                Custom Cabinetry
+                Custom Interiors
               </span>
             </Link>
             <p className="mt-6 max-w-md font-display text-2xl leading-tight text-foreground/85 md:text-3xl">
@@ -64,7 +61,7 @@ export function Footer() {
         </div>
 
         <div className="mt-16 flex flex-col items-start justify-between gap-3 border-t border-border/60 pt-6 text-xs uppercase tracking-widest2 text-muted-foreground md:flex-row md:items-center">
-          <span>© {new Date().getFullYear()} SCI Seattle Cabinets &amp; Interiors · All rights reserved.</span>
+          <span>© {new Date().getFullYear()} SCI Custom Interiors · All rights reserved.</span>
           <span>Crafted in Monroe, Washington</span>
         </div>
       </div>

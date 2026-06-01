@@ -15,9 +15,9 @@ const LINKS = [
 
 export function Navbar() {
   const { scrollY } = useScroll();
-  const blur = useTransform(scrollY, [0, 120], [0, 14]);
-  const bg = useTransform(scrollY, [0, 120], ["0", "0.75"]);
-  const borderOpacity = useTransform(scrollY, [0, 120], [0, 0.6]);
+  const blur = useTransform(scrollY, [0, 120], [4, 14]);
+  const bg = useTransform(scrollY, [0, 120], ["0.45", "0.95"]);
+  const borderOpacity = useTransform(scrollY, [0, 120], [0.2, 0.7]);
   const [open, setOpen] = React.useState(false);
   const [scrolled, setScrolled] = React.useState(false);
   const location = useLocation();
@@ -60,7 +60,7 @@ export function Navbar() {
             <Link
               to="/"
               className="group inline-flex flex-col font-display leading-none"
-              aria-label="SCI Seattle Cabinets & Interiors — Home"
+              aria-label="SCI Custom Interiors — Home"
             >
               <span className={cn(
                 "text-3xl font-medium tracking-tight transition-colors duration-300 md:text-4xl",
@@ -69,16 +69,10 @@ export function Navbar() {
                 SCI
               </span>
               <span className={cn(
-                "hidden text-[11px] uppercase tracking-widest2 transition-colors duration-300 group-hover:text-accent md:inline",
-                heroOverlay ? "text-white/60" : "text-muted-foreground",
+                "text-[11px] uppercase tracking-widest2 transition-colors duration-300 group-hover:text-accent",
+                heroOverlay ? "text-white/70" : "text-muted-foreground",
               )}>
-                Seattle Cabinets &amp; Interiors
-              </span>
-              <span className={cn(
-                "hidden text-[11px] uppercase tracking-widest2 transition-colors duration-300 group-hover:text-accent md:inline",
-                heroOverlay ? "text-white/40" : "text-muted-foreground/70",
-              )}>
-                Custom Cabinetry
+                Custom Interiors
               </span>
             </Link>
 

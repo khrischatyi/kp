@@ -140,7 +140,7 @@ export function Hero() {
             </h2>
           </div>
           <div className="col-span-12 flex flex-wrap items-center gap-4 md:col-span-4 md:justify-end">
-            <Button asChild size="lg" variant="outline" className="border-white/25 text-white hover:border-white/50 hover:bg-white/[0.08]">
+            <Button asChild size="lg" variant="outline" className="rounded-md border-border/30 bg-background/45 text-white backdrop-blur-md hover:border-border/70 hover:bg-background/95">
               <Link to="/contacts">
                 Begin a Project
               </Link>
