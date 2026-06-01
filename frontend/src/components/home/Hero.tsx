@@ -117,7 +117,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className="col-span-12 flex items-center gap-3 text-xs uppercase tracking-widest2 text-white/60 md:col-span-6"
+          className="col-span-12 mt-32 flex items-center gap-3 self-start text-xs uppercase tracking-widest2 text-white/60 md:col-span-6 md:mt-40"
         >
           <span className="size-1.5 rounded-full bg-accent" />
           <span>Seattle · Est. 1996</span>
