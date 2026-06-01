@@ -9,10 +9,13 @@ import logging
 import smtplib
 from email.message import EmailMessage
 from typing import Any
+from zoneinfo import ZoneInfo
 
 from app.core.config import settings
 
 logger = logging.getLogger(__name__)
+
+_PACIFIC = ZoneInfo("America/Los_Angeles")
 
 
 def _build_message(submission: dict[str, Any], sender: str, recipient: str) -> EmailMessage:
@@ -26,7 +29,10 @@ def _build_message(submission: dict[str, Any], sender: str, recipient: str) -> E
 
     phone = submission.get("phone") or "—"
     created_at = submission["created_at"]
-    created_iso = created_at.isoformat() if hasattr(created_at, "isoformat") else str(created_at)
+    if hasattr(created_at, "astimezone"):
+        sent_at = created_at.astimezone(_PACIFIC).strftime("%B %-d, %Y at %-I:%M %p PT")
+    else:
+        sent_at = str(created_at)
 
     body = (
         f"A new {kind_label} was submitted.\n"
@@ -35,10 +41,7 @@ def _build_message(submission: dict[str, Any], sender: str, recipient: str) -> E
         f"Email:   {submission['email']}\n"
         f"Phone:   {phone}\n"
         f"Source:  {submission['source']}\n"
-        f"Sent at: {created_iso}\n"
-        f"\n"
-        f"Message:\n"
-        f"{submission['message']}\n"
+        f"Sent at: {sent_at}\n"
     )
 
     msg = EmailMessage()

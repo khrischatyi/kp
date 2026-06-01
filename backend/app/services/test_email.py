@@ -33,9 +33,11 @@ def test_build_message_contact_source():
     assert "Email:   jane@example.com" in body
     assert "Phone:   +1-555-0100" in body
     assert "Source:  contact" in body
-    assert "I love your cabinets" in body
-    assert "2026-05-30T14:00:00+00:00" in body
+    # Sample is 2026-05-30 14:00 UTC → 7:00 AM PT (DST in May)
+    assert "Sent at: May 30, 2026 at 7:00 AM PT" in body
     assert "Submission ID" not in body
+    assert "I love your cabinets" not in body
+    assert "Message:" not in body
 
 
 def test_build_message_career_source_changes_subject():
